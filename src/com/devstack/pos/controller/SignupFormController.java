@@ -11,44 +11,44 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class LoginFormController {
-    public JFXTextField txtEmail;
-    
+public class SignupFormController {
     public AnchorPane context;
+    public JFXTextField txtEmail;
     public JFXPasswordField txtPassword;
 
-
-    public void btnSignInOnAction(ActionEvent actionEvent) {
+    public void btnRegisterNowOnAction(ActionEvent actionEvent) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/robotikka", "root", "SEngineer,531");
-            String sql = "SELECT * FROM user WHERE email=?";
+            String sql = "INSERT INTO user VALUES (?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,txtEmail.getText());
+            preparedStatement.setString(2, PasswordManager.encryptPassword(txtPassword.getText()));
 
-            ResultSet set = preparedStatement.executeQuery();
-
-            if(set.next()){
-                if(PasswordManager.checkPassword(txtPassword.getText(), set.getString("password"))) {
-                    System.out.println("Completed");
-                } else {
-                    new Alert(Alert.AlertType.WARNING, "Check your password and try again!").show();
-                }
-
-            } else {
-                new Alert(Alert.AlertType.WARNING, "User email not found!").show();
+            if(preparedStatement.executeUpdate() > 0){
+                new Alert(Alert.AlertType.CONFIRMATION, "User Saved!").show();
+                clearFields();
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }
 
         }catch (ClassNotFoundException | SQLException e){
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-    public void btnCreateAnAccountOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("SignupForm");
+    private void clearFields() {
+        txtEmail.clear();
+        txtPassword.clear();
+    }
+
+    public void btnAlreadyHaveAnAccountOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("LoginForm");
     }
 
     private void setUi(String url) throws IOException {

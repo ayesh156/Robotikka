@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="context" prefHeight="345.0" prefWidth="399.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.LoginFormController">
+<AnchorPane fx:id="context" prefHeight="345.0" prefWidth="399.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.SignupFormController">
    <children>
       <Label layoutX="152.0" layoutY="24.0" text="Robotikka" textFill="#510303">
          <font>
@@ -21,7 +20,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="33.0" layoutY="190.0" onAction="#btnSignInOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #3498db;" text="Sign In" textFill="WHITE">
+      <JFXButton layoutX="33.0" layoutY="190.0" onAction="#btnRegisterNowOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #9b59b6;" text="Register Now" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -29,7 +28,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="33.0" layoutY="273.0" onAction="#btnCreateAnAccountOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #34495e;" text="Create an Account" textFill="WHITE">
+      <JFXButton layoutX="33.0" layoutY="273.0" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #34495e;" text="Already have an Account" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
