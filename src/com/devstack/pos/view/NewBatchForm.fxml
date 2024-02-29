@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.NewBatchFormController">
+   <children>
+      <Label layoutX="16.0" layoutY="11.0" text="Batch Management" textFill="#9e0e0e">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutX="16.0" layoutY="32.0" prefHeight="12.0" prefWidth="344.0" />
+      <AnchorPane layoutX="16.0" layoutY="44.0" prefHeight="193.0" prefWidth="210.0" style="-fx-background-color: #bdc3c7;">
+         <children>
+            <ImageView fx:id="barcodeImage" fitHeight="186.0" fitWidth="210.0" layoutY="3.0" pickOnBounds="true" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="txtQty" layoutX="239.0" layoutY="44.0" prefHeight="25.0" prefWidth="190.0" promptText="Qty">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSellingPrice" layoutX="239.0" layoutY="119.0" prefHeight="25.0" prefWidth="190.0" promptText="Selling Price">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtShowPrice" layoutX="239.0" layoutY="156.0" prefHeight="25.0" prefWidth="190.0" promptText="Show Price">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtBuyingPrice" layoutX="239.0" layoutY="81.0" prefHeight="25.0" prefWidth="190.0" promptText="Buying Price">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtProductId" layoutX="16.0" layoutY="245.0" prefHeight="29.0" prefWidth="210.0" promptText="Product Id">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="txtDescription" layoutX="16.0" layoutY="282.0" prefHeight="109.0" prefWidth="416.0" promptText="Description">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextArea>
+      <RadioButton fx:id="rBtnYes" layoutX="240.0" layoutY="214.0" mnemonicParsing="false" text="YES">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <toggleGroup>
+            <ToggleGroup fx:id="discount" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="299.0" layoutY="214.0" mnemonicParsing="false" selected="true" text="NO" toggleGroup="$discount">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </RadioButton>
+      <Label layoutX="239.0" layoutY="188.0" text="Discount %" textFill="#2a4fb8">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="353.0" layoutY="247.0" onAction="#btnSaveBatch" style="-fx-background-color: #27ae60;" text="Save Batch" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

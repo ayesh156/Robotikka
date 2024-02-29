@@ -20,7 +20,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="33.0" layoutY="190.0" onAction="#btnRegisterNowOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #9b59b6;" text="Register Now" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="33.0" layoutY="190.0" onAction="#btnRegisterNowOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #9b59b6;" text="Register Now" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -28,7 +28,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton layoutX="33.0" layoutY="273.0" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #34495e;" text="Already have an Account" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="33.0" layoutY="273.0" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="333.0" style="-fx-background-color: #34495e;" text="Already have an Account" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

@@ -1,6 +1,10 @@
 package com.devstack.pos.controller;
 
-import com.devstack.pos.util.PasswordManager;
+import com.devstack.pos.bo.BoFactory;
+import com.devstack.pos.bo.custom.UserBo;
+import com.devstack.pos.bo.custom.impl.UserBoImpl;
+import com.devstack.pos.dto.UserDto;
+import com.devstack.pos.enums.BoType;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -11,9 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SignupFormController {
@@ -21,16 +22,11 @@ public class SignupFormController {
     public JFXTextField txtEmail;
     public JFXPasswordField txtPassword;
 
+    UserBo bo = BoFactory.getInstance().getBo(BoType.USER);
+
     public void btnRegisterNowOnAction(ActionEvent actionEvent) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/robotikka", "root", "SEngineer,531");
-            String sql = "INSERT INTO user VALUES (?,?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,txtEmail.getText());
-            preparedStatement.setString(2, PasswordManager.encryptPassword(txtPassword.getText()));
-
-            if(preparedStatement.executeUpdate() > 0){
+            if(bo.saveUser(new UserDto(txtEmail.getText(),txtPassword.getText()))){
                 new Alert(Alert.AlertType.CONFIRMATION, "User Saved!").show();
                 clearFields();
             }else {
@@ -53,6 +49,7 @@ public class SignupFormController {
 
     private void setUi(String url) throws IOException {
         Stage stage = (Stage) context.getScene().getWindow();
+        stage.centerOnScreen();
         stage.setScene(
                 new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml")))
         );
