@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.NewBatchFormController">
    <children>
       <Label layoutX="16.0" layoutY="11.0" text="Batch Management" textFill="#9e0e0e">
@@ -80,7 +79,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="353.0" layoutY="247.0" onAction="#btnSaveBatch" style="-fx-background-color: #27ae60;" text="Save Batch" textFill="WHITE">
+      <JFXButton fx:id="btnSaveUpdateBatch" buttonType="RAISED" layoutX="339.0" layoutY="247.0" onAction="#btnSaveBatch" style="-fx-background-color: #27ae60;" text="Save Batch" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

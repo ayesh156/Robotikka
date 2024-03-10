@@ -2,10 +2,13 @@ package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.ProductBo;
+import com.devstack.pos.bo.custom.ProductDetailsBo;
 import com.devstack.pos.bo.custom.impl.ProductBoImpl;
 import com.devstack.pos.dto.CustomerDto;
+import com.devstack.pos.dto.ProductDetailsDto;
 import com.devstack.pos.dto.ProductDto;
 import com.devstack.pos.enums.BoType;
+import com.devstack.pos.view.tm.ProductDetailsTm;
 import com.devstack.pos.view.tm.ProductTm;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -39,8 +42,17 @@ public class ProductMainFormController {
     public TableView<ProductTm> tbl;
     public TableColumn colProductId;
     public JFXButton btnNewBatch;
+    public TableView<ProductDetailsTm> tblDetails;
+    public TableColumn colPDId;
+    public TableColumn colPDQty;
+    public TableColumn colPDSellingPrice;
+    public TableColumn colPDBuyingPrice;
+    public TableColumn colPDDAvailability;
+    public TableColumn colPDShowPrice;
+    public TableColumn colPDDelete;
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
+    ProductDetailsBo detailsBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAILS);
 
     private String searchText = "";
 
@@ -51,6 +63,14 @@ public class ProductMainFormController {
         colProductShowMore.setCellValueFactory(new PropertyValueFactory<>("showMore"));
         colProductDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
+        colPDId.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colPDQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colPDSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
+        colPDBuyingPrice.setCellValueFactory(new PropertyValueFactory<>("buyingPrice"));
+        colPDDAvailability.setCellValueFactory(new PropertyValueFactory<>("discountAvailability"));
+        colPDShowPrice.setCellValueFactory(new PropertyValueFactory<>("showPrice"));
+        colPDDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
+
         // ----- load new Product Id
         loadProductId();
         loadAllProduct(searchText);
@@ -60,12 +80,25 @@ public class ProductMainFormController {
             setData(newValue);
         });
 
+        tblDetails.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                loadExternalUi(true,newValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     private void setData(ProductTm newValue) {
         txtSelectedProdCode.setText(String.valueOf(newValue.getCode()));
         txtSelectedProdDescription.setText(newValue.getDescription());
         btnNewBatch.setDisable(false);
+        try {
+            loadBatchData(newValue.getCode());
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadProductId() {
@@ -140,14 +173,18 @@ public class ProductMainFormController {
     }
 
     public void btnNewBatchOnAction(ActionEvent event) throws IOException {
+        loadExternalUi(false,null);
+    }
 
+    private void loadExternalUi(boolean state, ProductDetailsTm tm) throws IOException {
         if(!txtSelectedProdCode.getText().isEmpty()){
+            Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                     .getResource("../view/NewBatchForm.fxml"));
             Parent parent = fxmlLoader.load();
             NewBatchFormController controller = fxmlLoader.getController();
-            controller.setProductCode(Integer.parseInt(txtSelectedProdCode.getText()),txtSelectedProdDescription.getText());
-            Stage stage = new Stage();
+            controller.setDetails(Integer.parseInt(txtSelectedProdCode.getText()),txtSelectedProdDescription.getText(),stage,state, tm);
+
             stage.setScene(new Scene(parent));
             stage.show();
             stage.centerOnScreen();
@@ -155,4 +192,23 @@ public class ProductMainFormController {
             new Alert(Alert.AlertType.WARNING, "Please select a valid one!").show();
         }
     }
+
+    private void loadBatchData(int code) throws SQLException, ClassNotFoundException {
+        ObservableList<ProductDetailsTm> obList = FXCollections.observableArrayList();
+        for(ProductDetailsDto p: detailsBo.findAllProductDetails(code)){
+            Button btn = new Button("Delete");
+            ProductDetailsTm tm = new ProductDetailsTm(
+                    p.getCode(),
+                    p.getQtyOnHand(),
+                    p.getSellingPrice(),
+                    p.getBuyingPrice(),
+                    p.isDiscountAvailability(),
+                    p.getShowPrice(),
+                    btn
+            );
+            obList.add(tm);
+        }
+        tblDetails.setItems(obList);
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.devstack.pos.dao;
 
+import com.devstack.pos.dao.custom.ProductDetailsDao;
 import com.devstack.pos.dao.custom.impl.CustomerDaoImpl;
 import com.devstack.pos.dao.custom.impl.ProductDaoImpl;
+import com.devstack.pos.dao.custom.impl.ProductDetailsDaoImpl;
 import com.devstack.pos.dao.custom.impl.UserDaoImpl;
 import com.devstack.pos.enums.DaoType;
 
@@ -21,6 +23,8 @@ public class DaoFactory {
                 return (T) new CustomerDaoImpl();
             case PRODUCT:
                 return (T) new ProductDaoImpl();
+            case PRODUCT_DETAILS:
+                return (T) new ProductDetailsDaoImpl();
             default:
                 return null;
         }

@@ -62,15 +62,15 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <TableView layoutX="452.0" layoutY="229.0" prefHeight="248.0" prefWidth="528.0">
+      <TableView fx:id="tblDetails" layoutX="452.0" layoutY="229.0" prefHeight="248.0" prefWidth="528.0">
          <columns>
-            <TableColumn prefWidth="39.0" text="#" />
-            <TableColumn prefWidth="67.0" text="QTY" />
-            <TableColumn prefWidth="101.0" text="Selling Price" />
-            <TableColumn prefWidth="111.0" text="Buying Price" />
-            <TableColumn prefWidth="61.0" text="D:Av" />
-            <TableColumn prefWidth="79.0" text="Show Price" />
-            <TableColumn prefWidth="69.0" text="Delete" />
+            <TableColumn fx:id="colPDId" prefWidth="39.0" text="#" />
+            <TableColumn fx:id="colPDQty" prefWidth="67.0" text="QTY" />
+            <TableColumn fx:id="colPDSellingPrice" prefWidth="101.0" text="Selling Price" />
+            <TableColumn fx:id="colPDBuyingPrice" prefWidth="111.0" text="Buying Price" />
+            <TableColumn fx:id="colPDDAvailability" prefWidth="61.0" text="D:Av" />
+            <TableColumn fx:id="colPDShowPrice" prefWidth="79.0" text="Show Price" />
+            <TableColumn fx:id="colPDDelete" prefWidth="69.0" text="Delete" />
          </columns>
       </TableView>
       <JFXTextArea fx:id="txtSelectedProdDescription" editable="false" layoutX="453.0" layoutY="93.0" prefHeight="121.0" prefWidth="528.0" promptText="Description" style="-fx-background-color: white;">

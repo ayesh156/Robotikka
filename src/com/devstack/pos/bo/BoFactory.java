@@ -2,6 +2,7 @@ package com.devstack.pos.bo;
 
 import com.devstack.pos.bo.custom.impl.CustomerBoImpl;
 import com.devstack.pos.bo.custom.impl.ProductBoImpl;
+import com.devstack.pos.bo.custom.impl.ProductDetailsBoImpl;
 import com.devstack.pos.bo.custom.impl.UserBoImpl;
 import com.devstack.pos.dao.custom.impl.CustomerDaoImpl;
 import com.devstack.pos.dao.custom.impl.ProductDaoImpl;
@@ -25,6 +26,8 @@ public class BoFactory {
                 return (T) new CustomerBoImpl();
             case PRODUCT:
                 return (T) new ProductBoImpl();
+            case PRODUCT_DETAILS:
+                return (T) new ProductDetailsBoImpl();
             default:
                 return null;
         }
