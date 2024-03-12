@@ -3,12 +3,12 @@ package com.devstack.pos.view.tm;
 import javafx.scene.control.Button;
 
 public class CustomerTm {
-    int id;
-    String email;
-    String name;
-    String contact;
-    double salary;
-    Button deleteButton;
+    private int id;
+    private String email;
+    private String name;
+    private String contact;
+    private double salary;
+    private Button deleteButton;
 
     public CustomerTm() {
     }

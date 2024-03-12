@@ -12,4 +12,6 @@ public interface ProductDetailsDao extends CrudDao<ProductDetails, String> {
     public List<ProductDetails> findAllProductDetails(int productCode) throws SQLException, ClassNotFoundException;
     public ProductDetails findProductDetails(String code) throws SQLException, ClassNotFoundException;
     public ProductDetailsJoinDto findProductDetailsJoinData(String code) throws SQLException, ClassNotFoundException;
+
+    public boolean manageQty(String barcode, int qty) throws SQLException, ClassNotFoundException;
 }

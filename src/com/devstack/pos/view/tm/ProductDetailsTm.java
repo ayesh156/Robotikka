@@ -3,13 +3,13 @@ package com.devstack.pos.view.tm;
 import javafx.scene.control.Button;
 
 public class ProductDetailsTm {
-    String code;
-    int qty;
-    double sellingPrice;
-    double buyingPrice;
-    boolean discountAvailability;
-    double showPrice;
-    Button delete;
+    private String code;
+    private int qty;
+    private double sellingPrice;
+    private double buyingPrice;
+    private boolean discountAvailability;
+    private double showPrice;
+    private Button delete;
 
     public ProductDetailsTm() {
     }

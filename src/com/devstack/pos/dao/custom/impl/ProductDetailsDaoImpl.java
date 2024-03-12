@@ -107,4 +107,9 @@ public class ProductDetailsDaoImpl implements ProductDetailsDao {
         }
         return null;
     }
+
+    @Override
+    public boolean manageQty(String barcode, int qty) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("UPDATE product_details SET qty_on_hand=(qty_on_hand-?) WHERE code=?", qty, barcode);
+    }
 }
