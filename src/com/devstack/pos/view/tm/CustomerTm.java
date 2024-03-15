@@ -13,6 +13,14 @@ public class CustomerTm {
     public CustomerTm() {
     }
 
+    public CustomerTm(int id, String email, String name, String contact, double salary) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.contact = contact;
+        this.salary = salary;
+    }
+
     public CustomerTm(int id, String email, String name, String contact, double salary, Button deleteButton) {
         this.id = id;
         this.email = email;

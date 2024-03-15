@@ -17,10 +17,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.*;
 
 public class CustomerFormController {
 
@@ -193,5 +197,41 @@ public class CustomerFormController {
         stage.setScene(
                 new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml")))
         );
+    }
+
+    public void btnPrintAllOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, JRException {
+
+        List<CustomerTm> dataList = new ArrayList<>();
+        int counter = 1;
+
+        for(CustomerDto dto: bo.findAllCustomers()){
+
+            CustomerTm tm = new CustomerTm(
+                    counter,
+                    dto.getEmail(),
+                    dto.getName(),
+                    dto.getContact(),
+                    dto.getSalary()
+            );
+
+            counter++;
+            dataList.add(tm);
+
+        }
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(dataList);
+        Map<String,Object> parameters = new HashMap<>();
+        parameters.put("MyParameter",dataSource);
+
+        InputStream report = getClass().getResourceAsStream("../CustomerReport_A4.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(report);
+
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
+        jasperViewer.setVisible(true);
+
+
     }
 }

@@ -73,5 +73,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="344.0" layoutY="94.0" onAction="#btnPrintAllOnAction" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #16a085;" text="Print All" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
